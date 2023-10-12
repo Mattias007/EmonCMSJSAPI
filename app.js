@@ -11,16 +11,18 @@ async function allTemp() {
   console.log(result);
 }
 
-allTemp()
 
   app.get('/ControllAC', (req, res) => {
     // console.log(req)
     // // const commands = new ardoinoController(req)
-
     const message = 'what to do';
     res.json({ message });
   });
 
+  app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
+  
 
   app.listen(port, () => {
     console.log(`AC logic api listening on port ${port}`)
