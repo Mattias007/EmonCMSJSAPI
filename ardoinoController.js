@@ -3,21 +3,21 @@ module.exports = class ardoinoController {
     constructor(name, temp){
         this.name = name
         this.temp = temp
-        this.tarettemp = null
+        this.targettemp = 0
         this.descption = null
-        this.command = null
-        this.overide = "off"
+        this.command = "off"
+        this.override = "off"
     }
 
-    updateTemp(temp) {
-        this.temp = temp
-    }
-    
-    checkTemp(templevel){
-        if (this.temp <= templevel){
-            this.command = {command : "on"}
-        }else if (this.temp  >= templevel){
-            this.command = {command : "off"}
+
+    checkTemp(){
+        if (this.temp <= this.targettemp){
+            this.command = "on"
+        }
+        if (this.temp  >= this.targettemp){
+            this.command = "off"
+        }else{
+            this.command = "lastState"
         }
 
     }

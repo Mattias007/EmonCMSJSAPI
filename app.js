@@ -20,30 +20,53 @@ emonCMS.getALLTemp().then(function(res){
   i = 0
   Object.keys(res).forEach(key => {
     ACcontrollers[i].temp = res[key].value
-    console.log(i)
     i++
-    console.log(ACcontrollers)
   });
 
 
 });},5000);
 
-  app.post('/ControllAC', (req, res) => {
-    
-    const controller = ACcontrollers[Number(req.query.name)] // get the controller model from list
-
-    const command = emonCMS.MakeComTempOnly(controller)
-
-    res.send('what to do')
+  app.post('/ControllAC', (req, res) => { // Endpoint to ardoino request and respons with comand
+    const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
+    if (controller.override == "off"){
+      controller.checkTemp()
+    }else{
+      return res.send(controller.command)
+    }
+    res.send(controller.command)
   });
 
-  app.post('/ManualControll', (req, res) =>  {
 
+  app.get('/ControllerInfo', (req, res) => { // Endpoint to ardoino request and respons with comand
+    const controller = ACcontrollers // get the controller model from list
 
+    res.send(controller)
+  });
+
+  app.get('/AddTempTarget', (req, res) => {
+    const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
+    controller.targettemp = req.query.targettemp
+    res.send(`Target temp is now ${controller.targettemp}`)
+  });
+
+  app.get('/ManualOnOff', (req, res) => {
+    const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
+    controller.command = req.query.command
+    res.send(`AC is now ${controller.command}`)
+  });
+
+  app.get('/ManualControll', (req, res) =>  {
+    const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
+    if (controller.override == "off"){
+      controller.override = "on"
+    }else{
+      controller.override = "off"
+    }
+    res.send(`AC Manual mode is ${controller.override}`)
   });
 
   app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('From Api World!')
   })
   
 

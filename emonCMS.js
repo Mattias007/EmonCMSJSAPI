@@ -37,14 +37,5 @@ module.exports = class emonCMS {
       })}
 
 
-      static MakeComTempOnly(command,target) {
-        if (command.overide == "off"){
-          // console.log(command)
-        }else{
-          return
-        }
-
-      }
-
   }
 
