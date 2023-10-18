@@ -1,8 +1,9 @@
 module.exports = class ardoinoController {
 
-    constructor(name, temp){
+    constructor(name){
         this.name = name
-        this.temp = temp
+        this.temp = null
+        this.hum = null
         this.targettemp = 0
         this.descption = null
         this.command = "off"
@@ -16,8 +17,6 @@ module.exports = class ardoinoController {
         }
         if (this.temp  >= this.targettemp){
             this.command = "off"
-        }else{
-            this.command = "lastState"
         }
 
     }

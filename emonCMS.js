@@ -16,7 +16,7 @@ module.exports = class emonCMS {
     }
 
     static getALLTemp() {
-      return route.get("/AC").then((response) => {
+      return route.get("/ACT").then((response) => {
         // console.log(response.data)
         return response.data
       })
@@ -26,8 +26,20 @@ module.exports = class emonCMS {
       })
     }
 
+    static getALLHum() {
+      return route.get("/ACH").then((response) => {
+        // console.log(response.data)
+        return response.data
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+      })
+    }
+
+
     static MakeallControllers() {
-      return route.get("/AC").then((response) => {
+      return route.get("/ACT").then((response) => {
         // console.log(response.data)
         return { data: response.data }
       })
