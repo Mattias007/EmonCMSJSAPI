@@ -37,7 +37,7 @@ emonCMS.getALLTemp().then(function(res){
 
 },5000);
 
-  app.get('/ControllAC', (req, res) => { // Endpoint to ardoino request and respons with comand
+  app.post('/ControllAC', (req, res) => { // Endpoint to ardoino request and respons with comand
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
     console.log("workin")
     if (controller.override == "off"){
