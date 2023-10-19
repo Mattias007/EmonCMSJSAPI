@@ -15,6 +15,7 @@ emonCMS.MakeallControllers().then(function(res){
     const model = new ardoinoController(key)
     ACcontrollers.push(model)
   });
+  console.log(ACcontrollers)
 })
 
 setInterval(async function(){
@@ -36,8 +37,9 @@ emonCMS.getALLTemp().then(function(res){
 
 },5000);
 
-  app.post('/ControllAC', (req, res) => { // Endpoint to ardoino request and respons with comand
+  app.get('/ControllAC', (req, res) => { // Endpoint to ardoino request and respons with comand
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
+    console.log("workin")
     if (controller.override == "off"){
       controller.checkTemp()
     }else{
@@ -61,7 +63,7 @@ emonCMS.getALLTemp().then(function(res){
     res.send(`Target temp is now ${controller.targettemp}`)
   });
 
-  app.post('/ManualOnOff', (req, res) => {
+  app.get('/ManualOnOff', (req, res) => {
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
     controller.name = req.query.name
     if (controller.command == "off"){
@@ -73,7 +75,7 @@ emonCMS.getALLTemp().then(function(res){
     res.send(controller)
   });
 
-  app.post('/ManualControll', (req, res) =>  {
+  app.get('/ManualControll', (req, res) =>  {
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
     if (controller.override == "off"){
       controller.override = "on"
@@ -88,8 +90,7 @@ emonCMS.getALLTemp().then(function(res){
   })
   
 
-  app.listen(port,'192.168.137.1', () => {
+  app.listen(port, () => {
     console.log(`AC logic api listening on port ${port}`)
   })
 
-  
