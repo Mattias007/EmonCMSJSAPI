@@ -42,11 +42,9 @@ emonCMS.getALLTemp().then(function(res){
     console.log("workin")
     if (controller.override == "off"){
       controller.checkTemp()
-    }else{
-      return res.send(controller.command)
     }
-
-    res.send(controller.command)
+    res.json({ command : controller.command , targettemp : controller.targettemp })
+    res.send()
     
   });
 
