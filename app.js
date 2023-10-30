@@ -56,7 +56,7 @@ emonCMS.getALLTemp().then(function(res){
 
   app.post('/AddTempTarget', (req, res) => {
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
-    controller.targettemp = req.query.targettemp // makes Celsius in to fharenhite
+    controller.targettemp = Number(req.query.targettemp) // makes Celsius in to fharenhite
     res.send(`Target temp is now ${controller.targettemp}`)
   });
 
