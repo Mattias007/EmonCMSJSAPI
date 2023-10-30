@@ -61,7 +61,7 @@ emonCMS.getALLTemp().then(function(res){
     res.send(`Target temp is now ${controller.targettemp}`)
   });
 
-  app.get('/ManualOnOff', (req, res) => {
+  app.post('/ManualOnOff', (req, res) => {
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
     controller.name = req.query.name
     if (controller.command == "off"){
@@ -73,7 +73,7 @@ emonCMS.getALLTemp().then(function(res){
     res.send(controller)
   });
 
-  app.get('/ManualControll', (req, res) =>  {
+  app.post('/ManualControll', (req, res) =>  {
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
     if (controller.override == "off"){
       controller.override = "on"
