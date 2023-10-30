@@ -48,7 +48,7 @@ emonCMS.getALLTemp().then(function(res){
     
   });
 
-
+` `
   app.get('/ControllerInfo', (req, res) => { // Endpoint to ardoino request and respons with comand
     const controller = ACcontrollers // get the controller model from list
 
@@ -57,7 +57,7 @@ emonCMS.getALLTemp().then(function(res){
 
   app.post('/AddTempTarget', (req, res) => {
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
-    controller.targettemp = req.query.targettemp*(9/5)+32 // makes Celsius in to fharenhite
+    controller.targettemp = req.query.targettemp // makes Celsius in to fharenhite
     res.send(`Target temp is now ${controller.targettemp}`)
   });
 
@@ -71,7 +71,7 @@ emonCMS.getALLTemp().then(function(res){
     }
 
     res.send(controller)
-  });
+  }); 
 
   app.post('/ManualControll', (req, res) =>  {
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
