@@ -48,7 +48,6 @@ emonCMS.getALLTemp().then(function(res){
     
   });
 
-` `
   app.get('/ControllerInfo', (req, res) => { // Endpoint to ardoino request and respons with comand
     const controller = ACcontrollers // get the controller model from list
 
@@ -75,10 +74,10 @@ emonCMS.getALLTemp().then(function(res){
 
   app.post('/ManualControll', (req, res) =>  {
     const controller = ACcontrollers[Number(req.query.name.slice(6))] // get the controller model from list
-    if (controller.override == "off"){
-      controller.override = "on"
+    if (controller.override == 0){
+      controller.override = 1
     }else{
-      controller.override = "off"
+      controller.override = 0
     }
     res.send(controller)
   });
