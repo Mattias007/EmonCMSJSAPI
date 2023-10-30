@@ -6,17 +6,17 @@ module.exports = class ardoinoController {
         this.hum = null
         this.targettemp = 0
         this.descption = null
-        this.command = "off"
-        this.override = "off"
+        this.command = 0
+        this.override = 0
     }
 
 
     checkTemp(){
         if (this.temp <= this.targettemp){
-            this.command = "on"
+            this.command = 1
         }
         if (this.temp  >= this.targettemp){
-            this.command = "off"
+            this.command = 0
         }
 
     }
